@@ -15,7 +15,8 @@ internal object Repository {
         Elephant("Charlie", 5, "A gentle young elephant rescued from a sanctuary, now enjoying his wide-open space."),
         Bird("Cindy", 4, "A colorful canary with a beautiful singing voice that brightens everyone's day."),
         Lion("Darrel", 4, "A majestic young lion who was found abandoned and is now the king of our heart."),
-        Parrot("Parry", 1, "A talkative parrot who can mimic almost any sound and loves to say 'Hello!'.")
+        Parrot("Parry", 1, "A talkative parrot who can mimic almost any sound and loves to say 'Hello!'."),
+        Zebra("Ziggy", 2, "A striking zebra with unique stripes, known for being fast and playful.")
     )
 
     var user : Person? = null

@@ -10,12 +10,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.udacity.pawhaven.components.PlayPauseComponent
+import com.udacity.pawhaven.components.SoundPulseView
 import com.udacity.pawhaven.data.Animal
 import com.udacity.pawhaven.data.IntentExtras
 
 class PetDetailFragment : Fragment() {
 
     private var pet: Animal? = null
+    private lateinit var pulseView: SoundPulseView
 
     companion object {
         fun newInstance(pet: Animal): PetDetailFragment {
@@ -45,7 +47,18 @@ class PetDetailFragment : Fragment() {
             view.findViewById<TextView>(R.id.petDetailName).text = pet.name
             view.findViewById<TextView>(R.id.petDetailAge).text = getString(R.string.age_years_format, pet.age)
             view.findViewById<TextView>(R.id.petDetailDescription).text = pet.description
-            view.findViewById<PlayPauseComponent>(R.id.petDetailPlayPause).setSound(pet.soundRes)
+
+            pulseView = view.findViewById(R.id.petDetailPulse)
+            val playPause = view.findViewById<PlayPauseComponent>(R.id.petDetailPlayPause)
+            playPause.setSound(pet.soundRes)
+
+            playPause.setOnPlayStateChangedListener { isPlaying ->
+                if (isPlaying) {
+                    pulseView.startAnimation()
+                } else {
+                    pulseView.stopAnimation()
+                }
+            }
         }
 
         view.findViewById<MaterialButton>(R.id.adoptButton).setOnClickListener {

@@ -22,6 +22,7 @@ class PlayPauseComponent @JvmOverloads constructor(
     private val icon: ImageView
 
     private var isPlaying: Boolean = false
+    fun isPlaying() = isPlaying
     private var soundResId: Int = 0
     private val audioPlayer: PawHavenAudioPlayer
 
@@ -86,7 +87,14 @@ class PlayPauseComponent @JvmOverloads constructor(
         }
     }
 
+    private var onPlayStateChangedListener: ((Boolean) -> Unit)? = null
+
+    fun setOnPlayStateChangedListener(listener: (Boolean) -> Unit) {
+        onPlayStateChangedListener = listener
+    }
+
     private fun updateIcon() {
+        onPlayStateChangedListener?.invoke(isPlaying)
         if (isPlaying) {
             icon.setImageResource(R.drawable.ic_pause)
             icon.contentDescription =
