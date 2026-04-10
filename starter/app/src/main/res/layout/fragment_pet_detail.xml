@@ -38,6 +38,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/petDetailName" />
 
+        <com.udacity.pawhaven.components.SoundPulseView
+            android:id="@+id/petDetailPulse"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:layout_constraintBottom_toBottomOf="@id/petDetailPlayPause"
+            app:layout_constraintEnd_toEndOf="@id/petDetailPlayPause"
+            app:layout_constraintStart_toStartOf="@id/petDetailPlayPause"
+            app:layout_constraintTop_toTopOf="@id/petDetailPlayPause" />
+
         <com.udacity.pawhaven.components.PlayPauseComponent
             android:id="@+id/petDetailPlayPause"
             android:layout_width="56dp"

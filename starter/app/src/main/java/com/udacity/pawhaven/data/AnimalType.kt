@@ -15,7 +15,8 @@ enum class AnimalType(
     PARROT("Parrot", R.drawable.ic_parrot, R.raw.parrot_chirp),
     ELEPHANT("Elephant", R.drawable.ic_elephant, R.raw.elephant_trumpet),
     LION("Lion", R.drawable.ic_lion, R.raw.lion_roar),
-    BIRD("Bird", R.drawable.ic_bird, R.raw.bird_chirp);
+    BIRD("Bird", R.drawable.ic_bird, R.raw.bird_chirp),
+    ZEBRA("Zebra", R.drawable.ic_paw, R.raw.dog_bark);
 
     // TODO Feel Free to add other animal types.
 
@@ -36,5 +37,6 @@ enum class AnimalType(
             ELEPHANT -> Elephant(name, age, description, imageRes, soundRes)
             LION -> Lion(name, age, description, imageRes, soundRes)
             BIRD -> Bird(name, age, description, imageRes, soundRes)
+            ZEBRA -> Zebra(name, age, description, imageRes, soundRes)
         }
 }
