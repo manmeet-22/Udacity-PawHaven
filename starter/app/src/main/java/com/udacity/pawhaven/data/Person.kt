@@ -1,7 +1,7 @@
 package com.udacity.pawhaven.data
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 
 @Parcelize

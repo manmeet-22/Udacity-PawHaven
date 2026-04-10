@@ -12,8 +12,8 @@ abstract class Animal(
     open val age: Int,
     open val description: String,
     open val imageRes: Int,
-    open val soundRes: Int
-) : Parcelable {
+    override val soundRes: Int
+) : Talkable, Parcelable {
     val id: String = UUID.randomUUID().toString()
 }
 
@@ -27,5 +27,48 @@ class Dog(
     @RawRes override val soundRes: Int = AnimalType.DOG.defaultSoundRes
 ) : Animal(name, age, description, imageRes, soundRes), Parcelable
 
-//TODO Add other animals
+@Parcelize
+class Cat(
+    override val name: String,
+    override val age: Int,
+    override val description: String = AnimalType.CAT.defaultDescription(name),
+    @DrawableRes override val imageRes: Int = AnimalType.CAT.defaultIconRes,
+    @RawRes override val soundRes: Int = AnimalType.CAT.defaultSoundRes
+) : Animal(name, age, description, imageRes, soundRes), Parcelable
+
+@Parcelize
+class Parrot(
+    override val name: String,
+    override val age: Int,
+    override val description: String = AnimalType.PARROT.defaultDescription(name),
+    @DrawableRes override val imageRes: Int = AnimalType.PARROT.defaultIconRes,
+    @RawRes override val soundRes: Int = AnimalType.PARROT.defaultSoundRes
+) : Animal(name, age, description, imageRes, soundRes), Parcelable
+
+@Parcelize
+class Elephant(
+    override val name: String,
+    override val age: Int,
+    override val description: String = AnimalType.ELEPHANT.defaultDescription(name),
+    @DrawableRes override val imageRes: Int = AnimalType.ELEPHANT.defaultIconRes,
+    @RawRes override val soundRes: Int = AnimalType.ELEPHANT.defaultSoundRes
+) : Animal(name, age, description, imageRes, soundRes), Parcelable
+
+@Parcelize
+class Lion(
+    override val name: String,
+    override val age: Int,
+    override val description: String = AnimalType.LION.defaultDescription(name),
+    @DrawableRes override val imageRes: Int = AnimalType.LION.defaultIconRes,
+    @RawRes override val soundRes: Int = AnimalType.LION.defaultSoundRes
+) : Animal(name, age, description, imageRes, soundRes), Parcelable
+
+@Parcelize
+class Bird(
+    override val name: String,
+    override val age: Int,
+    override val description: String = AnimalType.BIRD.defaultDescription(name),
+    @DrawableRes override val imageRes: Int = AnimalType.BIRD.defaultIconRes,
+    @RawRes override val soundRes: Int = AnimalType.BIRD.defaultSoundRes
+) : Animal(name, age, description, imageRes, soundRes), Parcelable
 

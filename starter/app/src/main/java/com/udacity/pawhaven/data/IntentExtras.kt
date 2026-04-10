@@ -10,4 +10,5 @@ object IntentExtras {
     const val ROLE_VOLUNTEER = "VOLUNTEER"
 
     const val EXTRA_PERSON = "extra_person"
+    const val EXTRA_ANIMAL = "extra_animal"
 }

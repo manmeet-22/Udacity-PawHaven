@@ -17,21 +17,30 @@ class PetRowComponent @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
+    private val petImage: ImageView
+    private val petName: TextView
+    private val petAge: TextView
+    private val petDescriptionSnippet: TextView
+    private val playPauseComponent: PlayPauseComponent
+
     init {
         orientation = VERTICAL
 
         // Inflate the row layout into this custom view
         LayoutInflater.from(context).inflate(R.layout.view_pet_row, this, true)
 
-        //TODO Handle View Binding (findViewById) including the PlayPauseComponent
-
+        petImage = findViewById(R.id.petImage)
+        petName = findViewById(R.id.petName)
+        petAge = findViewById(R.id.petAge)
+        petDescriptionSnippet = findViewById(R.id.petDescriptionSnippet)
+        playPauseComponent = findViewById(R.id.playPauseComponent)
     }
 
     fun bind(pet: Animal) {
-        // TODO:
-        // - set image resource
-        // - set name text
-        // - set age text using age_years_format
-        // - set sound on playButton (pet.soundRes)
+        petImage.setImageResource(pet.imageRes)
+        petName.text = pet.name
+        petAge.text = context.getString(R.string.age_years_format, pet.age)
+        petDescriptionSnippet.text = pet.description
+        playPauseComponent.setSound(pet.soundRes)
     }
 }

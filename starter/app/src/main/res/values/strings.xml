@@ -32,7 +32,7 @@
     <!-- Hints -->
     <string name="first_name_hint">Enter first name</string>
     <string name="last_name_hint">Enter last name</string>
-    <string name="age_hint_years">Age in years</string>
+    <string name="age_hint">Age in years</string>
     <string name="name_hint">Enter name</string>
 
     <!-- Roles -->

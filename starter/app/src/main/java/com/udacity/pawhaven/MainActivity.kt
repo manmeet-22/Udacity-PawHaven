@@ -1,6 +1,6 @@
 package com.udacity.pawhaven
 
-import `android.content.Intent
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.button.MaterialButton
 
@@ -17,6 +17,10 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setUpOnGetStartedButtonClicked() {
-        //TODO Handle starting ProfileActivity
+        val getStartedButton = findViewById<MaterialButton>(R.id.get_started_button)
+        getStartedButton.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

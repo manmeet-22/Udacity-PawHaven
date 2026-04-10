@@ -16,10 +16,16 @@
             android:name="com.udacity.pawhaven.MainActivity"
             android:exported="true">
 
-            <!-- TODO Add intent filter for launcher activity-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
-        <!-- TODO Add other activities -->
+        <activity android:name="com.udacity.pawhaven.ProfileActivity" />
+        <activity android:name="com.udacity.pawhaven.PetListActivity" />
+        <activity android:name="com.udacity.pawhaven.PetDetailActivity" />
+        <activity android:name="com.udacity.pawhaven.AddAnimalActivity" />
 
 
 
