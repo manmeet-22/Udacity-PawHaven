@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.udacity.pawhaven.data.Animal
 import com.udacity.pawhaven.data.Repository
+import com.udacity.pawhaven.data.Role
 
 class PetListFragment : Fragment() {
 
@@ -42,12 +43,32 @@ class PetListFragment : Fragment() {
         recyclerView.adapter = PetListAdapter(Repository.pets) { pet ->
             listener?.onPetSelected(pet)
         }
-
-        view.findViewById<FloatingActionButton>(R.id.addPetFab).setOnClickListener {
-            listener?.onAddPetClicked()
-        }
-
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupAddButtonVisibility(view)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        view?.let { setupAddButtonVisibility(it) }
+    }
+
+    private fun setupAddButtonVisibility(view: View) {
+        val addFab = view.findViewById<FloatingActionButton>(R.id.addPetFab)
+        val isVolunteer = Repository.user?.role == Role.VOLUNTEER
+        
+        if (isVolunteer) {
+            addFab.visibility = View.VISIBLE
+            addFab.setOnClickListener {
+                listener?.onAddPetClicked()
+            }
+        } else {
+            addFab.visibility = View.GONE
+            addFab.setOnClickListener(null)
+        }
     }
 
     override fun onDetach() {

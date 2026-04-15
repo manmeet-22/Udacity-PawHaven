@@ -13,6 +13,8 @@ import com.udacity.pawhaven.components.PlayPauseComponent
 import com.udacity.pawhaven.components.SoundPulseView
 import com.udacity.pawhaven.data.Animal
 import com.udacity.pawhaven.data.IntentExtras
+import com.udacity.pawhaven.data.Repository
+import com.udacity.pawhaven.data.Role
 
 class PetDetailFragment : Fragment() {
 
@@ -40,7 +42,12 @@ class PetDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_pet_detail, container, false)
+        return inflater.inflate(R.layout.fragment_pet_detail, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupAdoptButtonVisibility(view)
 
         pet?.let { pet ->
             view.findViewById<ImageView>(R.id.petDetailImage).setImageResource(pet.imageRes)
@@ -60,11 +67,25 @@ class PetDetailFragment : Fragment() {
                 }
             }
         }
+    }
 
-        view.findViewById<MaterialButton>(R.id.adoptButton).setOnClickListener {
-            Toast.makeText(context, R.string.adoption_coming_soon, Toast.LENGTH_SHORT).show()
+    override fun onResume() {
+        super.onResume()
+        view?.let { setupAdoptButtonVisibility(it) }
+    }
+
+    private fun setupAdoptButtonVisibility(view: View) {
+        val adoptButton = view.findViewById<MaterialButton>(R.id.adoptButton)
+        val isParent = Repository.user?.role == Role.INTERESTED_PARENT
+
+        if (isParent) {
+            adoptButton.visibility = View.VISIBLE
+            adoptButton.setOnClickListener {
+                Toast.makeText(context, R.string.adoption_coming_soon, Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            adoptButton.visibility = View.GONE
+            adoptButton.setOnClickListener(null)
         }
-
-        return view
     }
 }
