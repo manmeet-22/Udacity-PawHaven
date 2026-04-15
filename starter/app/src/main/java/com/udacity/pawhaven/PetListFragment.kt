@@ -43,20 +43,32 @@ class PetListFragment : Fragment() {
         recyclerView.adapter = PetListAdapter(Repository.pets) { pet ->
             listener?.onPetSelected(pet)
         }
+        return view
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupAddButtonVisibility(view)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        view?.let { setupAddButtonVisibility(it) }
+    }
+
+    private fun setupAddButtonVisibility(view: View) {
         val addFab = view.findViewById<FloatingActionButton>(R.id.addPetFab)
+        val isVolunteer = Repository.user?.role == Role.VOLUNTEER
         
-        // ROBUST ROLE CHECK: Add button only for Volunteers
-        if (Repository.user?.role == Role.VOLUNTEER) {
+        if (isVolunteer) {
             addFab.visibility = View.VISIBLE
             addFab.setOnClickListener {
                 listener?.onAddPetClicked()
             }
         } else {
             addFab.visibility = View.GONE
+            addFab.setOnClickListener(null)
         }
-
-        return view
     }
 
     override fun onDetach() {
