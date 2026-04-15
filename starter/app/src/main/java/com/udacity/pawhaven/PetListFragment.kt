@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.udacity.pawhaven.data.Animal
 import com.udacity.pawhaven.data.Repository
+import com.udacity.pawhaven.data.Role
 
 class PetListFragment : Fragment() {
 
@@ -44,15 +45,15 @@ class PetListFragment : Fragment() {
         }
 
         val addFab = view.findViewById<FloatingActionButton>(R.id.addPetFab)
-        val userRole = Repository.user?.role
         
-        if (userRole == com.udacity.pawhaven.data.Role.VOLUNTEER) {
-            addFab.show()
+        // ROBUST ROLE CHECK: Add button only for Volunteers
+        if (Repository.user?.role == Role.VOLUNTEER) {
+            addFab.visibility = View.VISIBLE
             addFab.setOnClickListener {
                 listener?.onAddPetClicked()
             }
         } else {
-            addFab.hide()
+            addFab.visibility = View.GONE
         }
 
         return view

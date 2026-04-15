@@ -13,6 +13,8 @@ import com.udacity.pawhaven.components.PlayPauseComponent
 import com.udacity.pawhaven.components.SoundPulseView
 import com.udacity.pawhaven.data.Animal
 import com.udacity.pawhaven.data.IntentExtras
+import com.udacity.pawhaven.data.Repository
+import com.udacity.pawhaven.data.Role
 
 class PetDetailFragment : Fragment() {
 
@@ -62,9 +64,9 @@ class PetDetailFragment : Fragment() {
         }
 
         val adoptButton = view.findViewById<MaterialButton>(R.id.adoptButton)
-        val userRole = com.udacity.pawhaven.data.Repository.user?.role
         
-        if (userRole == com.udacity.pawhaven.data.Role.INTERESTED_PARENT) {
+        // ROBUST ROLE CHECK: Adopt button only for Interested Parents
+        if (Repository.user?.role == Role.INTERESTED_PARENT) {
             adoptButton.visibility = View.VISIBLE
             adoptButton.setOnClickListener {
                 Toast.makeText(context, R.string.adoption_coming_soon, Toast.LENGTH_SHORT).show()
