@@ -43,8 +43,16 @@ class PetListFragment : Fragment() {
             listener?.onPetSelected(pet)
         }
 
-        view.findViewById<FloatingActionButton>(R.id.addPetFab).setOnClickListener {
-            listener?.onAddPetClicked()
+        val addFab = view.findViewById<FloatingActionButton>(R.id.addPetFab)
+        val userRole = Repository.user?.role
+        
+        if (userRole == com.udacity.pawhaven.data.Role.VOLUNTEER) {
+            addFab.show()
+            addFab.setOnClickListener {
+                listener?.onAddPetClicked()
+            }
+        } else {
+            addFab.hide()
         }
 
         return view

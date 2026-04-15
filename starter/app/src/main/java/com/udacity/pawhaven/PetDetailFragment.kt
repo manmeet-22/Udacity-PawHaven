@@ -61,8 +61,16 @@ class PetDetailFragment : Fragment() {
             }
         }
 
-        view.findViewById<MaterialButton>(R.id.adoptButton).setOnClickListener {
-            Toast.makeText(context, R.string.adoption_coming_soon, Toast.LENGTH_SHORT).show()
+        val adoptButton = view.findViewById<MaterialButton>(R.id.adoptButton)
+        val userRole = com.udacity.pawhaven.data.Repository.user?.role
+        
+        if (userRole == com.udacity.pawhaven.data.Role.INTERESTED_PARENT) {
+            adoptButton.visibility = View.VISIBLE
+            adoptButton.setOnClickListener {
+                Toast.makeText(context, R.string.adoption_coming_soon, Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            adoptButton.visibility = View.GONE
         }
 
         return view
